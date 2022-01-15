@@ -14,9 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_land.mk
+    $(LOCAL_DIR)/lineage_holland1.mk
 
 COMMON_LUNCH_CHOICES := \
-    aosp_land-user \
-    aosp_land-userdebug \
-    aosp_land-eng
+    lineage_holland1-user \
+    lineage_holland1-userdebug \
+    lineage_holland1-eng

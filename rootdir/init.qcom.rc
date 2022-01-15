@@ -464,3 +464,5 @@ on property:sys.boot_completed=1
 
 on property:dev.bootcomplete=1  
     restart ril-daemon
+    
+    mkdir /data/vendor/camera 0770 camera camera
