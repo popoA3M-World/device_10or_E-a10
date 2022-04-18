@@ -14,4 +14,4 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/nad_E.mk
+    $(LOCAL_DIR)/lineage_E.mk

@@ -20,8 +20,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_m.mk)
 
-# Inherit some common NusantaraOS stuff
-$(call inherit-product, vendor/nusantara/config/common_full_phone.mk)
+# Inherit some common LineageOS stuff
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 TARGET_GAPPS_ARCH := arm64
 TARGET_BOOT_ANIMATION_RES := 1080
@@ -30,10 +30,10 @@ TARGET_BOOT_ANIMATION_RES := 1080
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 PRODUCT_BRAND := 10or
-PRODUCT_MODEL := 10or E
+PRODUCT_MODEL := Tenor E
 PRODUCT_DEVICE := E
 PRODUCT_MANUFACTURER := 10or
-PRODUCT_NAME := nad_E
+PRODUCT_NAME := lineage_E
 
 PRODUCT_GMS_CLIENTID_BASE := android-huaqin
 
