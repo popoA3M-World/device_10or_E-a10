@@ -26,8 +26,6 @@
 
 #define LCD_LED         LEDS "lcd-backlight/"
 #define RED_LED         LEDS "red/"
-#define GREEN_LED       LEDS "green/"
-#define BLUE_LED        LEDS "blue/"
 
 #define BLINK           "blink"
 #define BRIGHTNESS      "brightness"
@@ -55,26 +53,22 @@ static void set(std::string path, int value) {
 }
 
 static uint32_t getBrightness(const LightState& state) {
-    uint32_t alpha, red, green, blue;
+    uint32_t alpha, red;
 
     /*
      * Extract brightness from AARRGGBB.
      */
     alpha = (state.color >> 24) & 0xFF;
-    red = (state.color >> 16) & 0xFF;
-    green = (state.color >> 8) & 0xFF;
-    blue = state.color & 0xFF;
+    red = state.color >> 16 & 0xFF;
 
     /*
      * Scale RGB brightness if Alpha brightness is not 0xFF.
      */
     if (alpha != 0xFF) {
         red = red * alpha / 0xFF;
-        green = green * alpha / 0xFF;
-        blue = blue * alpha / 0xFF;
     }
 
-    return (77 * red + 150 * green + 29 * blue) >> 8;
+    return (77 * red) >> 8;
 }
 
 static inline uint32_t scaleBrightness(uint32_t brightness, uint32_t maxBrightness) {
@@ -91,20 +85,16 @@ static void handleBacklight(const LightState& state) {
 }
 
 static void handleNotification(const LightState& state) {
-    int blink, onMs, offMs, red, green, blue;
+    int blink, onMs, offMs, red;
     uint32_t alpha;
 
     // Extract brightness from AARRGGBB
     alpha = (state.color >> 24) & 0xff;
-    red = (state.color >> 16) & 0xff;
-    green = (state.color >> 8) & 0xff;
-    blue = state.color & 0xff;
+    red = state.color >> 16 & 0xff;
 
     // Scale RGB brightness if Alpha brightness is not 0xFF
     if (alpha != 0xff) {
         red = (red * alpha) / 0xff;
-        green = (green * alpha) / 0xff;
-        blue = (blue * alpha) / 0xff;
     }
 
     switch (state.flashMode) {
@@ -137,26 +127,16 @@ static void handleNotification(const LightState& state) {
 
     /* Disable blinking. */
     set(RED_LED BLINK, 0);
-    set(GREEN_LED BLINK, 0);
-    set(BLUE_LED BLINK, 0);
 
     /* Enable blinking */
     if (blink){
         if (red)
             set(RED_LED BLINK, blink);
-        if (green)
-            set(GREEN_LED BLINK, blink);
-        if (blue)
-            set(BLUE_LED BLINK, blink);
     } else {
-        if (red == 0 && green == 0 && blue == 0) {
+        if (red == 0) {
             set(RED_LED BLINK, 0);
-            set(GREEN_LED BLINK, 0);
-            set(BLUE_LED BLINK, 0);
         }
         set(RED_LED BRIGHTNESS, red);
-        set(GREEN_LED BRIGHTNESS, green);
-        set(BLUE_LED BRIGHTNESS, blue);
     }
 }
 
