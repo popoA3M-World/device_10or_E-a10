@@ -1,4 +1,4 @@
-# Device configuration for 10or E
+# Device configuration for 10or(_Tenor_) E
 
 ## Spec Sheet
 
